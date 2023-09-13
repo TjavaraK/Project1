@@ -1,0 +1,347 @@
+{
+
+  “openapi”: “3.0.0”,
+
+  “info”: {
+
+    “title”: “Faculty API”,
+
+    “description”: “API for managing staff, offices, and courses in the Faculty of Computing and Informatics.”,
+
+    “version”: “1.0.0”
+
+  },
+
+  “paths”: {
+
+    “/lecturers”: {
+
+      “get”: {
+
+        “summary”: “Retrieve a list of all lecturers”,
+
+        “responses”: {
+
+          “200”: {
+
+            “description”: “List of lecturers successfully retrieved”
+
+          }
+
+        }
+
+      },
+
+      “post”: {
+
+        “summary”: “Add a new lecturer”,
+
+        “requestBody”: {
+
+          “required”: true,
+
+          “content”: {
+
+            “application/json”: {
+
+              “schema”: {
+
+                “$ref”: “#/components/schemas/Lecturer”
+
+              }
+
+            }
+
+          }
+
+        },
+
+        “responses”: {
+
+          “201”: {
+
+            “description”: “Lecturer successfully added”
+
+          }
+
+        }
+
+      }
+
+    },
+
+    “/lecturers/{staffNumber}”: {
+
+      “get”: {
+
+        “summary”: “Retrieve details of a specific lecturer by their staff number”,
+
+        “parameters”: [
+
+          {
+
+            “name”: “staffNumber”,
+
+            “in”: “path”,
+
+            “required”: true,
+
+            “schema”: {
+
+              “type”: “string”
+
+            }
+
+          }
+
+        ],
+
+        “responses”: {
+
+          “200”: {
+
+            “description”: “Lecturer details successfully retrieved”
+
+          }
+
+        }
+
+      },
+
+      “put”: {
+
+        “summary”: “Update an existing lecturer’s information”,
+
+        “parameters”: [
+
+          {
+
+            “name”: “staffNumber”,
+
+            “in”: “path”,
+
+            “required”: true,
+
+            “schema”: {
+
+              “type”: “string”
+
+            }
+
+          }
+
+        ],
+
+        “requestBody”: {
+
+          “required”: true,
+
+          “content”: {
+
+            “application/json”: {
+
+              “schema”: {
+
+                “$ref”: “#/components/schemas/Lecturer”
+
+              }
+
+            }
+
+          }
+
+        },
+
+        “responses”: {
+
+          “200”: {
+
+            “description”: “Lecturer information successfully updated”
+
+          }
+
+        }
+
+      },
+
+      “delete”: {
+
+        “summary”: “Delete a lecturer’s record by their staff number”,
+
+        “parameters”: [
+
+          {
+
+            “name”: “staffNumber”,
+
+            “in”: “path”,
+
+            “required”: true,
+
+            “schema”: {
+
+              “type”: “string”
+
+            }
+
+          }
+
+        ],
+
+        “responses”: {
+
+          “204”: {
+
+            “description”: “Lecturer record successfully deleted”
+
+          }
+
+        }
+
+      }
+
+    },
+
+    “/courses/{courseCode}/lecturers”: {
+
+      “get”: {
+
+        “summary”: “Retrieve all lecturers that teach a certain course”,
+
+        “parameters”: [
+
+          {
+
+            “name”: “courseCode”,
+
+            “in”: “path”,
+
+            “required”: true,
+
+            “schema”: {
+
+              “type”: “string”
+
+            }
+
+          }
+
+        ],
+
+        “responses”: {
+
+          “200”: {
+
+            “description”: “List of lecturers successfully retrieved”
+
+          }
+
+        }
+
+      }
+
+    },
+
+    “/offices/{officeNumber}/lecturers”: {
+
+      “get”: {
+
+        “summary”: “Retrieve all lecturers that sit in the same office”,
+
+        “parameters”: [
+
+          {
+
+            “name”: “officeNumber”,
+
+            “in”: “path”,
+
+            “required”: true,
+
+            “schema”: {
+
+              “type”: “string”
+
+            }
+
+          }
+
+        ],
+
+        “responses”: {
+
+          “200”: {
+
+            “description”: “List of lecturers successfully retrieved”
+
+          }
+
+        }
+
+      }
+
+    }
+
+  },
+
+  “components”: {
+
+    “schemas”: {
+
+      “Lecturer”: {
+
+        “type”: “object”,
+
+        “properties”: {
+
+          “staffNumber”: {
+
+            “type”: “string”
+
+          },
+
+          “officeNumber”: {
+
+            “type”: “string”
+
+          },
+
+          “staffName”: {
+
+            “type”: “string”
+
+          },
+
+          “title”: {
+
+            “type”: “string”
+
+          },
+
+          “courses”: {
+
+            “type”: “array”,
+
+            “items”: {
+
+              “type”: “string”
+
+            }
+
+          }
+
+        },
+
+        “required”: [“staffNumber”, “officeNumber”, “staffName”, “title”]
+
+      }
+
+    }
+
+  }
+
+}
+
+
+
+
